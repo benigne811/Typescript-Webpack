@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/main.ts",
+  entry: path.resolve(__dirname, "src", "main.ts"),
 
   output: {
     filename: "bundle.js",
@@ -12,7 +12,12 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        use: "ts-loader",
+        use: {
+          loader: "ts-loader",
+          options: {
+            configFile: path.resolve(__dirname, "..", "tsconfig.json")
+          }
+        },
         exclude: /node_modules/,
       },
     ],
